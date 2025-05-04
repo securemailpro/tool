@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TempGenius - Modern Temporary Email Solution</title>
+    <meta name="description" content="Generate secure, anonymous temporary email addresses instantly. Protect your privacy with our disposable email service.">
+    <meta name="keywords" content="temporary email, disposable email, secure email, anonymous email, email privacy">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="TempGenius - Secure Disposable Email Service">
+    <meta property="og:description" content="Generate anonymous temporary email addresses with automatic refresh and spam protection">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://example.com/tempgenius-og.jpg">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --background: #f8fafc;
+            --surface: rgba(255, 255, 255, 0.9);
+            --text: #0f172a;
+            --border: rgba(0, 0, 0, 0.1);
+            --radius: 1rem;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            --glass: blur(16px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            padding: 4rem 0 6rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.05) 100%);
+        }
+
+        /* Main Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 2rem;
+            margin-top: -4rem;
+            position: relative;
+        }
+
+        /* Email Card */
+        .email-card {
+            background: var(--surface);
+            backdrop-filter: var(--glass);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .email-display {
+            background: rgba(99, 102, 241, 0.03);
+            border-radius: calc(var(--radius) - 4px);
+            padding: 2rem;
+            margin: 2rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .email-display:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            backdrop-filter: var(--glass);
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Inbox */
+        .inbox {
+            background: var(--surface);
+            backdrop-filter: var(--glass);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .email-item {
+            background: rgba(99, 102, 241, 0.03);
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .email-item:hover {
+            background: rgba(99, 102, 241, 0.05);
+            transform: translateX(8px);
+        }
+
+        /* Ad Sections */
+        .ad-section {
+            background: var(--surface);
+            backdrop-filter: var(--glass);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                margin-top: -6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .header {
+                padding: 3rem 0 4rem;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .email-item {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 style="font-size: 2.75rem; margin-bottom: 1rem;">TempGenius</h1>
+            <p style="font-size: 1.25rem; opacity: 0.9;">Secure Anonymous Email Solution</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="main-grid">
+            <!-- Main Content -->
+            <div class="email-card">
+                <div class="email-display">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <div style="width: 64px; height: 64px; background: rgba(99, 102, 241, 0.1); border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-envelope-open-text fa-lg" style="color: var(--primary);"></i>
+                        </div>
+                        <h2 id="current-email" style="font-size: 1.75rem; margin-bottom: 0.5rem; word-break: break-all;">generating...</h2>
+                        <p id="timer" style="color: var(--primary); font-weight: 500;">
+                            <i class="fas fa-clock"></i> 
+                            <span>Expires in 60:00</span>
+                        </p>
+                    </div>
+                    <button class="btn" onclick="generateNewEmail()">
+                        <i class="fas fa-redo"></i>
+                        Generate New Email
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <aside>
+                <div class="ad-section">
+                    <!-- AdSense Placeholder -->
+                    <div style="background: rgba(99, 102, 241, 0.05); padding: 1.5rem; border-radius: 0.75rem;">
+                        <p style="color: var(--primary); font-weight: 500;">Advertisement</p>
+                    </div>
+                </div>
+
+                <div class="inbox">
+                    <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-inbox"></i> Email Inbox
+                    </h3>
+                    <div id="inbox-messages">
+                        <div class="email-item">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <strong>Welcome to TempGenius</strong>
+                                <small>Just now</small>
+                            </div>
+                            <p style="opacity: 0.8;">Your secure temporary email is ready</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+        // Email Generation System
+        let currentEmail = null;
+        let timerInterval = null;
+
+        const domains = [
+            '@tempgenius.net',
+            '@anonymail.io',
+            '@secureinbox.co',
+            '@privaterelay.me'
+        ];
+
+        function generateRandomEmail() {
+            const prefix = Math.random().toString(36).substring(2, 8);
+            const domain = domains[Math.floor(Math.random() * domains.length)];
+            return `${prefix}${domain}`;
+        }
+
+        function updateEmailDisplay() {
+            const emailElement = document.getElementById('current-email');
+            emailElement.textContent = currentEmail;
+            startTimer(3600);
+        }
+
+        function generateNewEmail() {
+            currentEmail = generateRandomEmail();
+            updateEmailDisplay();
+            simulateIncomingEmail();
+        }
+
+        // Timer System
+        function startTimer(duration) {
+            clearInterval(timerInterval);
+            const timerElement = document.getElementById('timer');
+            let remaining = duration;
+
+            timerInterval = setInterval(() => {
+                const minutes = Math.floor(remaining / 60);
+                const seconds = remaining % 60;
+                
+                timerElement.innerHTML = `
+                    <i class="fas fa-clock"></i>
+                    Expires in ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}
+                `;
+
+                if (--remaining < 0) {
+                    clearInterval(timerInterval);
+                    timerElement.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Session Expired';
+                }
+            }, 1000);
+        }
+
+        // Inbox Simulation
+        function simulateIncomingEmail() {
+            const inbox = document.getElementById('inbox-messages');
+            const newEmail = document.createElement('div');
+            newEmail.className = 'email-item';
+            newEmail.innerHTML = `
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <strong>New Message</strong>
+                    <small>Just now</small>
+                </div>
+                <p style="opacity: 0.8;">Temporary email address activated</p>
+            `;
+            inbox.prepend(newEmail);
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            generateNewEmail();
+        });
+    </script>
+</body>
+</html>
